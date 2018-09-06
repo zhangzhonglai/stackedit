@@ -3,9 +3,10 @@ import networkSvc from '../../networkSvc';
 import store from '../../../store';
 import userSvc from '../../userSvc';
 
-const clientId = GITHUB_CLIENT_ID;
-const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
-const apiUrl = ENTERPRISE_GITHUB_HOSTNAME ? `${ENTERPRISE_GITHUB_HOSTNAME}/api/v3` : 'api.github.com';
+const clientId = process.env.GITHUB_CLIENT_ID || GITHUB_CLIENT_ID;
+const eHostname = process.env.ENTERPRISE_GITHUB_HOSTNAME;
+const hostname = eHostname || 'github.com';
+const apiUrl = eHostname ? `${eHostname}/api/v3` : 'api.github.com';
 const getScopes = token => [token.repoFullAccess ? 'repo' : 'public_repo', 'gist'];
 
 const request = (token, options) => networkSvc.request({

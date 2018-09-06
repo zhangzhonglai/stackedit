@@ -18,7 +18,6 @@ module.exports = {
     "NODE_ENV": false,
     "VERSION": false,
     "GOOGLE_CLIENT_ID": false,
-    "ENTERPRISE_GITHUB_HOSTNAME": false,
     "GITHUB_CLIENT_ID": false
   },
   // check if imports actually resolve
