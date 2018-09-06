@@ -3,6 +3,8 @@ import networkSvc from '../../networkSvc';
 import store from '../../../store';
 
 const clientId = GITHUB_CLIENT_ID;
+const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
+const apiUrl = ENTERPRISE_GITHUB_HOSTNAME ? `${ENTERPRISE_GITHUB_HOSTNAME}/api/v3` : 'api.github.com';
 const getScopes = token => [token.repoFullAccess ? 'repo' : 'public_repo', 'gist'];
 
 const request = (token, options) => networkSvc.request({
@@ -19,7 +21,7 @@ const request = (token, options) => networkSvc.request({
 
 const repoRequest = (token, owner, repo, options) => request(token, {
   ...options,
-  url: `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${options.url}`,
+  url: `https://${apiUrl}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${options.url}`,
 })
   .then(res => res.body);
 
@@ -35,7 +37,7 @@ export default {
    */
   async startOauth2(scopes, sub = null, silent = false) {
     const { code } = await networkSvc.startOauth2(
-      'https://github.com/login/oauth/authorize',
+      `https://${hostname}/login/oauth/authorize`,
       {
         client_id: clientId,
         scope: scopes.join(' '),
@@ -56,7 +58,7 @@ export default {
     // Call the user info endpoint
     const user = (await networkSvc.request({
       method: 'GET',
-      url: 'https://api.github.com/user',
+      url: `https://${apiUrl}/user`,
       params: {
         access_token: accessToken,
       },
@@ -90,7 +92,7 @@ export default {
    */
   async getUser(userId) {
     const user = (await networkSvc.request({
-      url: `https://api.github.com/user/${userId}`,
+      url: `https://${apiUrl}/user/${userId}`,
       params: {
         t: Date.now(), // Prevent from caching
       },
@@ -225,7 +227,7 @@ export default {
   }) {
     const { body } = await request(token, gistId ? {
       method: 'PATCH',
-      url: `https://api.github.com/gists/${gistId}`,
+      url: `https://${apiUrl}/gists/${gistId}`,
       body: {
         description,
         files: {
@@ -236,7 +238,7 @@ export default {
       },
     } : {
       method: 'POST',
-      url: 'https://api.github.com/gists',
+      url: `https://${apiUrl}/gists`,
       body: {
         description,
         files: {
@@ -259,7 +261,7 @@ export default {
     filename,
   }) {
     const result = (await request(token, {
-      url: `https://api.github.com/gists/${gistId}`,
+      url: `https://${apiUrl}/gists/${gistId}`,
     })).body.files[filename];
     if (!result) {
       throw new Error('Gist file not found.');
@@ -275,7 +277,7 @@ export default {
     gistId,
   }) {
     const { body } = await request(token, {
-      url: `https://api.github.com/gists/${gistId}/commits`,
+      url: `https://${apiUrl}/gists/${gistId}/commits`,
     });
     return body;
   },
@@ -290,7 +292,7 @@ export default {
     sha,
   }) {
     const result = (await request(token, {
-      url: `https://api.github.com/gists/${gistId}/${sha}`,
+      url: `https://${apiUrl}/gists/${gistId}/${sha}`,
     })).body.files[filename];
     if (!result) {
       throw new Error('Gist file not found.');

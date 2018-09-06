@@ -1,11 +1,14 @@
 const qs = require('qs'); // eslint-disable-line import/no-extraneous-dependencies
 const request = require('request');
 
+const { ENTERPRISE_GITHUB_HOSTNAME } = process.env;
+const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
+
 function githubToken(clientId, code) {
   return new Promise((resolve, reject) => {
     request({
       method: 'POST',
-      url: 'https://github.com/login/oauth/access_token',
+      url: `https://${hostname}/login/oauth/access_token`,
       qs: {
         client_id: clientId,
         client_secret: process.env.GITHUB_SECRET,

@@ -79,9 +79,9 @@ turndown:
 
 # GitHub commit messages
 github:
-  createFileMessage: '{{path}} created from https://stackedit.io/'
-  updateFileMessage: '{{path}} updated from https://stackedit.io/'
-  deleteFileMessage: '{{path}} deleted from https://stackedit.io/'
+  createFileMessage: '{{path}} created by StackEdit'
+  updateFileMessage: '{{path}} updated by StackEdit'
+  deleteFileMessage: '{{path}} deleted by StackEdit'
 
 # Default content for new files
 newFileContent: |

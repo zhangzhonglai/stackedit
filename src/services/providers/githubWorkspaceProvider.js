@@ -4,6 +4,7 @@ import Provider from './common/Provider';
 import utils from '../utils';
 import userSvc from '../userSvc';
 
+const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
 const getAbsolutePath = ({ id }) =>
   `${store.getters['workspace/currentWorkspace'].path || ''}${id}`;
 
@@ -42,11 +43,11 @@ export default new Provider({
     branch,
     path,
   }) {
-    return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/tree/${encodeURIComponent(branch)}/${utils.encodeUrlPath(path)}`;
+    return `https://${hostname}/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/tree/${encodeURIComponent(branch)}/${utils.encodeUrlPath(path)}`;
   },
   getSyncDataUrl({ id }) {
     const { owner, repo, branch } = store.getters['workspace/currentWorkspace'];
-    return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/tree/${encodeURIComponent(branch)}/${utils.encodeUrlPath(getAbsolutePath({ id }))}`;
+    return `https://${hostname}/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/tree/${encodeURIComponent(branch)}/${utils.encodeUrlPath(getAbsolutePath({ id }))}`;
   },
   getSyncDataDescription({ id }) {
     return getAbsolutePath({ id });

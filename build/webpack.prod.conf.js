@@ -30,6 +30,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       NODE_ENV: env.NODE_ENV,
       GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID,
+      ENTERPRISE_GITHUB_HOSTNAME: env.ENTERPRISE_GITHUB_HOSTNAME,
       GITHUB_CLIENT_ID: env.GITHUB_CLIENT_ID
     }),
     new webpack.optimize.UglifyJsPlugin({

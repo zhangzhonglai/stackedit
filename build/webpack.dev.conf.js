@@ -21,6 +21,7 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       NODE_ENV: config.dev.env.NODE_ENV,
       GOOGLE_CLIENT_ID: config.dev.env.GOOGLE_CLIENT_ID,
+      ENTERPRISE_GITHUB_HOSTNAME: config.dev.env.ENTERPRISE_GITHUB_HOSTNAME,
       GITHUB_CLIENT_ID: config.dev.env.GITHUB_CLIENT_ID
     }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
