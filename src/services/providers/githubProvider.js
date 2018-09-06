@@ -5,6 +5,7 @@ import utils from '../utils';
 import workspaceSvc from '../workspaceSvc';
 import userSvc from '../userSvc';
 
+const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
 const savedSha = {};
 
 export default new Provider({
@@ -19,7 +20,7 @@ export default new Provider({
     branch,
     path,
   }) {
-    return `https://github.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/tree/${encodeURIComponent(branch)}/${utils.encodeUrlPath(path)}`;
+    return `https://${hostname}/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/tree/${encodeURIComponent(branch)}/${utils.encodeUrlPath(path)}`;
   },
   getLocationDescription({ path }) {
     return path;
