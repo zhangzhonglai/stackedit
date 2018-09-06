@@ -4,7 +4,7 @@ import Provider from './common/Provider';
 import utils from '../utils';
 import userSvc from '../userSvc';
 
-const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
+const hostname = process.env.ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
 const getAbsolutePath = ({ id }) =>
   `${store.getters['workspace/currentWorkspace'].path || ''}${id}`;
 

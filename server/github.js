@@ -1,8 +1,7 @@
 const qs = require('qs'); // eslint-disable-line import/no-extraneous-dependencies
 const request = require('request');
 
-const { ENTERPRISE_GITHUB_HOSTNAME } = process.env;
-const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
+const hostname = process.env.ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
 
 function githubToken(clientId, code) {
   return new Promise((resolve, reject) => {

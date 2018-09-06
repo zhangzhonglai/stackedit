@@ -5,7 +5,7 @@ import utils from '../utils';
 import workspaceSvc from '../workspaceSvc';
 import userSvc from '../userSvc';
 
-const hostname = ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
+const hostname = process.env.ENTERPRISE_GITHUB_HOSTNAME || 'github.com';
 const savedSha = {};
 
 export default new Provider({

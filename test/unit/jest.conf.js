@@ -29,7 +29,6 @@ module.exports = {
   ],
   globals: {
     GOOGLE_CLIENT_ID: 'GOOGLE_CLIENT_ID',
-    ENTERPRISE_GITHUB_HOSTNAME: 'ENTERPRISE_GITHUB_HOSTNAME',
     GITHUB_CLIENT_ID: 'GITHUB_CLIENT_ID',
     NODE_ENV: 'production',
   },
